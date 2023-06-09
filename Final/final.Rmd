@@ -1,0 +1,200 @@
+---
+title: "KAHVE ÇEŞİTLERİ VE İÇERDİKLERİ MALZEMELERİN ANALİZİ"
+author: 
+  - Azime Zeynep Küçükkaya[^1]
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa-tr.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{turkish}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+ Bu çalışma, kahve yapımında kullanılan değişkenler arasındaki ilişkileri incelemek amacıyla yapılan bir analizi özetlemektedir. Çalışmada doymuş yağ, kolesterol, şeker, süt ve kafein gibi değişkenler arasındaki ilişkiler Pearson korelasyonu kullanılarak değerlendirilmiştir. Analiz sonuçları, doymuş yağ ile toplam yağ miktarı arasında güçlü bir pozitif ilişki olduğunu göstermiştir. Şeker miktarının belirli bir aralıkta yoğunlaştığı ve süt miktarının da kahvelerde belirli bir aralıkta yoğunlaştığı tespit edilmiştir. Ayrıca, toplam yağ miktarı ile kolesterol arasındaki ilişkiyi gösteren bir kutu grafiği oluşturulmuştur. Sonuçlar, kahvelerin içerdikleri malzemelerin ve boyutlarının tüketicilerin içecek tercihlerini bilinçli olarak yapmalarına yardımcı olabileceğini ve daha fazla araştırmanın yapılmasını önermektedir. Analizin geliştirilmesi için Starbucks gibi kahve zincirlerine içeceklerin içerdikleri maddelerin yer aldığı kataloglar veya broşürler eklenmeli ve tüketicilerden geri bildirim alınmalıdır.
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- ======================================================================= -->
+<!-- ============================== NOTLAR ================================= -->
+<!-- ======================================================================= -->
+[^1]:19080233, [Github Repo](https://github.com/azimezeynepkucukkaya/final.git)
+
+
+
+# Giriş
+Kahve tüketimi, insanların günlük rutinlerine entegre olmuş bir alışkanlıktır. İnsanlar kahveyi içerek enerji artışı sağlamak, uyanık kalmak, odaklanmak ve sosyal etkileşimlerde bulunmak gibi birçok amaçla tüketmektedir. Kahve tüketimi, insan hayatına çeşitli şekillerde entegre olmuştur:
+Sabah Rutini: Birçok kişi güne kahve içerek başlar. Kahve, içerdiği kafein sayesinde enerji seviyelerini artırır ve uyanık kalmanıza yardımcı olur. 
+İş Ortamı: Kahve, çalışma ortamlarında da yaygın olarak tüketilen bir içecektir. Kahve molası, birlikte vakit geçirme, sosyal etkileşimlerde bulunma ve stresi azaltma fırsatı sunar. [@wustarbucks]
+Sosyal Etkileşimler: Kahve, insanlar arasında sosyal etkileşimlerin bir parçası haline gelmiştir. Kahve, insanların bir araya gelmesini ve keyifli sohbetler yapmasını teşvik eden bir unsurdur.
+Kültürel Aktiviteler: Kahve, birçok kültürel aktivitenin bir parçası haline gelmiştir. Örneğin, kahve evleri veya kahve dükkanları, insanların bir araya gelip kahve içebilecekleri ve kültürel etkinliklere katılabilecekleri popüler mekanlardır. [@mccusker2006caffeine]
+Yaratıcılık ve Üretkenlik: Bazı insanlar, kahvenin yaratıcılığı ve üretkenliği artırdığına inanır. Bu nedenle, çalışırken veya projeler üzerinde çalışırken kahve içmeyi tercih ederler. Kahve, beyindeki odaklanma ve dikkat seviyelerini artırabilir, bu da verimliliği artırabilir.
+Ancak, her bireyin kahveye tepkisi farklı olabilir ve aşırı kahve tüketimi bazı insanlarda uyku sorunları, sinirlilik, mide rahatsızlıkları gibi olumsuz etkilere yol açabilir. Bu nedenle, herkes kendi tolerans seviyesine ve sağlık durumuna göre kahve tüketimini ayarlamalıdır. [@baruonu2018ikinci]
+
+
+## Çalışmanın Amacı
+Dünyada popüler bir kahve zinciri olan Starbucks'ın geniş bir kahve menüsü sunan ve farklı tat tercihlerine hitap eden bir marka olduğu için bu veriler oldukça ilgi çekicidir.
+Çalışmanın amacı, Starbucks verileri üzerinden tüketici tercihlerinin derinlemesine bir analizini yapmaktır. Kahve çeşitleri incelenirken bunların hazırlanmasında kullanılan malzemeler ve oranlarına odaklanılmıştır.
+Bu verilerin analizi, insanların kahve tercihlerini anlamak için önemli bir fırsat sunmaktadır. Hangi malzemeler ve oranlar tüketiciler tarafından tercih ediliyor? Eğer tüketiciler kahve zincirlerinden satın aldığı kahvelerin içerdiği malzemeleri tam olarak bilseydi yine de bu ürünleri tercih eder miydi? Bu cevaplar, kahve endüstrisindeki trendleri anlamak ve diğer kahve markalarına ilham kaynağı olmak açısından önemlidir. 
+
+
+## Literatür 
+
+Kahve dünya genelinde popüler bir içecektir ve çeşitli türleri vardır. Kahve çekirdekleri farklı işleme yöntemleriyle de işlenebilir. Kahve endüstrisinde sürdürülebilirlik ve kalite önemli hale gelmiştir. Kahve, farklı içecekler ve karışımlar halinde tüketilebilir. Yerel işletmeler ve özel kahve dükkanları da büyümektedir. Bugün ise Batı toplumlarının kahve tüketim kültürü, Starbucks gibi büyük şirketler aracılığıyla Batılı olmayan toplumlara yayılmaktadır. [@gizem2kahve] Starbucks, Amerika'nın en ünlü zincir kahve evlerinden biridir ve dünya genelinde büyük bir yaygınlığa sahiptir. Starbucks, Amerikan kültürünü ve küreselleşmeyi temsil eden bir markadır. Müşteri kitlesi genellikle alt-orta, orta ve üst-orta sınıfa ait olan kişilerdir. Starbucks, modern bireyin bireysellik ve kişisel konforu ön plana çıkaran tüketim alışkanlıklarını hedeflemektedir. [@kulturveiletisim985366] Starbucks'ın çeşitli kahve türleri ve özelleştirme seçenekleri, modern bireyin bireysellik ve kişisel konforuna odaklanan tüketim alışkanlıklarını karşılamak için tasarlanmıştır. [@wustarbucks] Ancak genel olarak, espresso, latte, cappuccino, Americano, macchiato, mocha ve Frappuccino gibi kahve türlerinin popülerlik kazandığı ve geniş bir kitle tarafından sevildiği bilinmektedir. Bu kahve türleri, kahve dükkanlarının menülerinde sıklıkla yer alır ve müşteriler tarafından tercih edilir. Kahve tüketim alışkanlıkları bireysel tercihlere bağlı olduğu için, hangi kahve türünün en sevilen olduğu konusunda net bir istatistiksel veri sunmak zordur. Ancak kahve sektörüne dair araştırmalar ve anketler, genel olarak espresso bazlı içeceklerin ve sütlü kahve türlerinin popüler olduğunu göstermektedir. Bu tür verileri kullanarak, kahve severlerin farklı damak zevklerine hitap eden çeşitli kahve türlerinin olduğunu ve bu türlerin geniş bir kitle tarafından sevildiğini belirtebiliriz.[@koch2019starbucks]
+
+# Veri 
+Kullanılan veri seti [GitHub](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-12-21/readme.md ) üzerinden indirilebilir bir veri setidir. Veri setini analizde kullanılmadan önce verileri çalışmanın amacına ve çalışmada yöneltilen sorulara ve değişkenlerin aldığı değerlere göre manipüle edilmiştir. Kullanılan veri seti kahve çeşitleri, kalorileri ve kullanılan malzemelerin oranları vs. hakkında bilgileri içermektedir. Veri setinin ham halinde 1147 gözlem ve 15 değişken bulunmaktadır. Analize uygun olarak ilk yapılan manipüle hamlesi data setinin içinde yer alan ‘whip’ ve ‘fiber_g’ değişkenleri veri setinden dışlamak olmuştur. Analizde kullanılmayacak sütun çıkarılmıştır.  Bu dışlama sonucu veri setimiz 13 değişken ve 1147 gözlem olarak kullanılmıştır. Ayrıca veri setinde yer alan NA gözlemler analiz dışı tutulmuştur. Böylece veri seti daha kullanılabilir hale gelmiştir.
+Çalışmanın bu bölümünde, sayısal veriler için bir özet istatistik tablosu oluşturulmuştur. (Tablo\ref{tab:ozet}). Bu tablo incelendiğinde kahvelerdeki süt, kalori, kolestrol oranı, sodyum, şeker ve kafein oranları ayrıca orta ve büyük boy içeceklerin servis sayısının ortalama, minimum, maksimum, medyan ve standart sapma değerleri görülmektedir.
+Çalışmanın bu bölümünde, kahve boyutlarının içerdiği miligram cinsinden kafein oranlarını gösteren özet istatistik tablosu oluşturulmuştur (Tablo\ref{tab:ozet2}). Tablo incelendiğinde kahve boyutları büyüdükçe içerdiği kafein oranları yüzdesel olarak artmaktadır. Starbucks’ta en çok tercih edilen kahve boyutları olan tall, grande, venti boylarının içerdikleri kafein oranlarının yüzdeleri sırasıyla şunlardır; 28%, 29%, 28%. Yüzde oranlarının birbirine yakın olması kahve yapımında kullanılan diğer malzemelerle seyreltilmesinden kaynaklanmaktadır. 
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(dplyr)
+
+survey <- read_csv("./data/starbucks.csv")
+survey1 <- survey %>%
+  select(-c("fiber_g","whip"))
+
+```
+
+
+
+
+```{r results='asis' , echo=FALSE}
+library(xtable) 
+# devtools::install_github("emraher/summarytools")
+library(summarytools)
+st_options(lang = "tr")
+
+
+survey1 %>%
+  select("milk", "serv_size_m_l", "calories", "cholesterol_mg","sodium_mg","sugar_g","caffeine_mg") %>% 
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Sayısal Değerler İçin Özet İstatistikler",
+         label = "tab:ozet",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+```
+
+```{r ozet2, echo=FALSE, results='asis'}
+library(gtsummary)
+survey2 <- survey1 %>% select("size", "caffeine_mg")
+survey2 %>% 
+    tbl_summary() %>%    modify_header(label ~ "Değişken") %>%
+    modify_footnote(    all_stat_cols() ~ "Kahve Boyutlarının Kafein Oranı (%)"
+  ) %>%  modify_caption("Tablo 2: Kahve Boyları ve Kafein oranlarının Özet İstatistikleri") %>%
+   bold_labels()
+```
+
+
+
+# Yöntem ve Veri Analizi
+Çalışmanın bu bölümünde, çalışmanın amacına ulaşmak ve araştırma sorularını cevaplayabilmek için bağımsız değişkenler arasındaki doğrusal bağımlılığı nasıl etkilediğini görmek için kullanılan Pearson korelasyonu uygulanmaktadır. (Şekil\@ref(fig:grafik1)) ve analiz sonucuna göre kategorik değişkenler arasındaki bu doğrusallık Q-Q grafiği aracılığıyla kontrol edilmektedir. (Şekil\@ref(fig:grafik2)) 
+
+Bu grafikte miligram cinsinden doymuş yağ ve yine miligram cinsinden toplam yağ miktarı içerisindeki oranını pearson methodu kullanarak aralarında pozitif ilişkiyi gösteren bir doğrusal grafik oluşturulmuştur. (Şekil\@ref(fig:grafik1)) Korelasyon testi için normal dağılımı gösteren Q-Q Grafiği ile değişkenlerin doğrusallığı gözlenmiştir. (Şekil\@ref(fig:grafik2))
+
+```{r grafik1, echo=FALSE, results='asis', fig.cap="Toplam Yağ İçerisindeki Doymuş Yağ Miktarı ( Gram cinsinden) "}
+library("ggpubr")
+
+ggscatter(survey1, 
+          x = "saturated_fat_g",
+          y = "total_fat_g",
+          color = "steelblue",
+          add = "reg.line", 
+          add.params = list(color = "green"),
+          conf.int = TRUE, 
+          cor.coef = TRUE, 
+          cor.coef.coord = c(15, 1),
+          cor.method = "pearson",
+          ggtheme = theme_minimal())
+```
+
+```{r echo=FALSE, results='asis'}
+p1 <- survey1 %>% 
+  ggplot(aes(sample = total_fat_g)) +
+  stat_qq() +
+  stat_qq_line()
+p2 <- survey1 %>%
+ggplot(aes(sample = saturated_fat_g)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+```{r grafik2, echo=FALSE, results='asis', fig.cap="Q-Q", fig.height=4, fig.width=4, fig.align='center'}
+gridExtra::grid.arrange(p1, p2)
+```
+
+Üçüncü grafikte ise (Şekil \@ref(fig:grafik3)) gram cinsinden şeker yoğunlukları grafiği görülmektedir. Şekerlerin yoğunluğu olarak en yoğun 25 ile 50 arasında yoğunlaştığı görülmektedir.
+
+```{r grafik3, fig.align='center', fig.cap='Kahve içerisineki Süt Yoğunluğu', echo=FALSE}
+
+survey1  %>%
+  ggplot(aes(x = sugar_g)) +
+  geom_histogram(aes(y = ..density..),
+                 colour = "black", 
+                 fill = "white") +
+  geom_density(alpha = 0.5,
+               fill = "#71f653")
+```
+
+Verilerdeki değişkenlerde denge kurmak için t-testlerinin kullanılması yaygındır. T-testi sonuçları istatistiksel anlamlılığı etkilemesi nedeniyle yanıltıcı olabilir. Standart sapma bu çerçevede ortalama farkı hesaplamak için ek bir adım olmaktadır. Burada Xb ve Xw sırasıyla; servis boyutu ile kafein oranını temsil etmektedir. Sb ve Sw ise servis boyutu ile kafein oranın varyansını temsil etmektedir. Bu denklemin sonucu servis edilen kahvelerin boyutu ile içerdikleri kafein oranı ilişkisinin olduğu varsayımını doğrular niteliktedir. 
+ 
+$$
+Y_t = \ 100(\bar{x}_w - \bar{x}_b) /[s_w^2 + s_b^2]^½
+$$
+Analizle ve veri setiyle ilgili daha ayrıntılı bilgi sahibi olmak ve değişkenler arasındaki ilişkileri incelemek için farklı değişken kombinasyonları ile çeşitli grafikler oluşturulmuştur. İlk grafikte (Şekil \@ref(fig:grafik1)) gram cinsinden toplam yağ miktarı içerisindeki doymuş yağ miktarı arasındaki ilişki gösterilmiştir. Grafiğe bakıldığında p değerinin 2.2e−16’dan daha küçük bir değer aldığı görülmektedir. Bu çok yüksek düzeyde istatistiksel olarak anlamı olduğunu göstermektedir. İkinci grafikte ise (Şekil\@ref(fig:grafik2)) normal dağılım için Q-Q grafiği görülmektedir. İstatistiklerde, bir Q-Q grafiği, iki olasılık dağılımının miktarlarını birbirlerine göre çizerek karşılaştırmak için grafiksel bir yöntem olan olasılık grafiğidir. Toplam yağ miktarı ile doymuş yağ arasında çok büyük bir sapma gerçekleşmediği görülmektedir hatta aralarında çok kuvvetli bir doğrusal ilişki vardır. Üçüncü grafikte ise (Şekil \@ref(fig:grafik3)) kahvelerin süt yoğunlukları grafiği görülmektedir. Kahvelerin şeker yoğunluğu olarak en yoğun olarak 25 ile 50 gram arasında yoğunlaştığı görülmektedir. Dördüncü grafikte ise (Şekil\@ref(fig:grafik4)) kutu grafiği veri çeyreklerini (veya yüzdelikleri) ve ortalamaları görüntüleyerek sayısal verilerin ve değişkenlerin görsel olarak dağılımını göstermek için kullanılmıştır. Bu grafik gram cinsinden toplam yağ ve miligram cinsinden kolesterol arasındaki ilişkiyi göstermektedir. 5. Grafiğe bakıldığında ise (Şekil\@ref(fig:grafik5)) kahve çeşitlerinin içindeki şeker, toplam yağ miktarı ve kalori miktarı arasındaki ilişki gösterilmiştir. Grafiğe bakıldığında toplam yağ miktarı ile şeker miktarı arasındaki pozitif korelasyon gözlemlenmektedir. Toplam yağ miktarı ile kalori arasında da pozitif korelasyon gözlemlenmektedir. Ayrıca bakıldığında kalori ile şeker miktarı arasında da pozitif korelasyon gözlemlenmektedir.
+
+
+```{r grafik4, fig.align='center', echo=FALSE, results='asis', fig.height=5, fig.width=5, fig.cap="Q-Q"}
+library(tidyverse)
+ggplot(survey1) +
+  na.omit() %>%
+  aes(x = total_fat_g, y = cholesterol_mg) +
+  geom_boxplot() +
+  labs(x ="total_fat_g",
+       y = "cholesterol_mg")
+```
+
+
+
+
+```{r grafik5, fig.cap="Kahve İçeriğindeki gram cinsinden şeker, gram cinsinden toplam yağ ve kahvelerin kalori dağılım matrisi", fig.align='center', echo = FALSE, fig.height=12, fig.width=18}
+survey1 %>%
+select("sugar_g", "calories", "total_fat_g") %>%
+  GGally::ggpairs()
+```
+
+
+
+
+# Sonuç
+ Yapılan çalışma sonucunda, doymuş yağ, kolesterol, şeker, süt ve kafein gibi kahve yapımında kullanılan değişkenler arasındaki oluşabilecek ilişkiler dikkate alınarak bir analiz yapılmıştır. 
+Pearson korelasyonu, bağımsız değişkenler arasındaki doğrusal bağımlılığın etkisini değerlendirmek ve araştırma sorularını cevaplamak için kullanılmıştır. Sonuçlar, bu korelasyon testiyle elde edilen değerlerin Q-Q grafiği aracılığıyla kontrol edildiğini göstermektedir. İlk olarak, gram cinsinden doymuş yağ ile toplam yağ miktarı arasındaki ilişkiyi gösteren bir doğrusal grafik oluşturulmuştur. Bunun sonucunda doymuş yağ miktarı ile toplam yağ miktarı arasındaki ilişkinin istatistiksel olarak anlamlı olduğunu ve güçlü bir pozitif ilişki olduğunu göstermektedir. Ayrıca, kategorik değişkenler arasındaki doğrusallığın Q-Q grafiği kullanılarak kontrol edildiği belirtilmektedir. Bu grafik, normal dağılımı gösteren bir grafik olarak tanımlanmaktadır. Yapılan analize göre, toplam yağ miktarı ile doymuş yağ miktarı arasında belirgin bir sapmanın olmadığı ve güçlü bir doğrusal ilişkinin olduğu görülmektedir. Şeker yoğunluğuyla ilgili olarak, gram cinsinden şeker miktarının en yoğun olarak 25 ile 50 arasında olduğu belirlenmiştir. Bu bulgu, şeker miktarının belirli bir aralıkta yoğunlaştığını ve bu aralığın şeker yoğunluğunu temsil ettiğini göstermektedir. Ayrıca, t-testlerinin değişkenler arasındaki dengeyi sağlamak için kullanıldığı belirtilmiştir. Çalışmanın bir diğer bulgusu, kahvelerin süt yoğunluğunun incelenmesidir. Bu grafik incelendiğinde, kahvelerin yoğunluğunun en yoğun olarak 25 ile 50 gram arasında olduğu görülmektedir. Bu sonuç, kahve içerisindeki süt miktarının belirli bir aralıkta yoğunlaştığını göstermektedir. Kutu grafiği, veri çeyreklerini ve ortalamalarını görsel olarak göstermek için kullanılan bir yöntemdir. Bu grafik, gram cinsinden toplam yağ miktarı ile miligram cinsinden kolesterol arasındaki ilişkiyi göstermektedir. Son olarak, kahve çeşitlerinin içerdikleri şeker miktarı, toplam yağ miktarı ve kalori miktarı arasındaki ilişki incelenmiştir. Grafikler incelendiğinde, toplam yağ miktarı ile şeker miktarı arasında pozitif bir korelasyon olduğu ve aynı şekilde toplam yağ miktarı ile kalori arasında da pozitif bir ilişki olduğu görülmektedir. Bunun yanı sıra, kalori ile şeker miktarı arasında da pozitif bir korelasyon gözlemlenmektedir.
+Sonuç olarak elde edilen bulgular, analizde sorulan soru ışığında bu çalışma Starbucks’ta bulunan kahve çeşitleri, bu kahvelerin boyutları ve içerdiği malzemeler kahve tüketicilerinin içecek tercihini daha bilinçli olarak yapılmasının farkındalığını artırmak için önemli bir katkı sağlayabilmektedir ve daha ileri araştırmaların yapılmasını önermektedir.
+Bu sonuçlar çerçevesinde, kahvelerin içerdikleri maddelerin oranlarını birbiriyle kıyaslanarak yahut içecek boyutlarını içerdikleri maddelerle kıyaslanarak analizin sonuçları tüketiciye sunulmuştur. Bu bağlamda yapılan analiz araştırma sorusuna büyük oranda cevap vermektedir ancak tüketiciden geri dönüş alınmış herhangi bir veri olmadığı için kesin bir cevap bulunamamıştır. 
+Analizin geliştirilebilmesi için Starbucks gibi kahve zincirlerine menülerin yanı sıra menüde yer alan içeceklerin içerdikleri maddeler ve araştırmanın analizlerinin yer aldığı kataloglar, broşürler veya tablolar konulmalıdır. Daha sonrasında analiz etmeye yetecek kadar süre zarfında tüketicilerden geri dönüş alıp bu bilgilendirmeler ışığında tüketici tercihlerinde bir değişiklik oldu mu bu test edilmelidir. Bu süre sonunda yapılacak yeni analiz de bu araştırmaya eklendiğinde araştırma sorununa tam olarak cevap alınmış olunacaktır.
+
+
+
+
+\newpage
+# Kaynakça {#references}
+<div id="refs"></div>
+
